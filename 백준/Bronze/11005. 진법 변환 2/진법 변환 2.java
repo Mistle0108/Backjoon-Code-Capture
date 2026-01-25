@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -17,8 +16,7 @@ class Main {
 
         int quotient = n / b;
         int remainder = n % b;     
-        int count = 1;
-       
+
         char value = remainder >= 10 ? (char)(remainder + 55) :(char)(remainder + 48);
 
         String result = "";
@@ -28,11 +26,8 @@ class Main {
 	    	remainder = quotient % b;
 	    	quotient  = quotient / b;
 	    	
-	    	count++;
-	    	
 	    	value = remainder >= 10 ? (char)(remainder + 55) :(char)(remainder + 48);
 	    	result = value + result;
-	        
 	    }
 	    
 	    bw.write(result);
@@ -41,5 +36,5 @@ class Main {
         
         br.close();
         bw.close();
-	}	
+	}
 }
