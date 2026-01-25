@@ -21,13 +21,12 @@ class Main {
         for(int i=0; i < n.length(); i++) {
         	
         	for(int k = 0; k < i; k++) {
-        		placeValue *= b;
+        		
         	}
-        	
-        	digit = Character.getNumericValue(n.charAt(n.length() - 1 - i));
+        	digit = n.charAt(n.length() - 1 - i) >= 'A' ? n.charAt(n.length() - 1 - i) - 'A' + 10: n.charAt(n.length() - 1 - i) - '0';
         	
         	total += placeValue * digit;
-        	placeValue = 1;
+        	placeValue *= b;
         }
         
         bw.write(String.valueOf(total));
