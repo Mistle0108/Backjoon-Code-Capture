@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -26,29 +25,29 @@ class Main {
         br.close();     
 	}
 	
-    static void nQueen(int row) {
-    	if(row == input) {
+    static void nQueen(int col) {
+    	if(col == input) {
     		count++;
     		return;
     	}
     	
     	// 각 row당 col 만큼 반복
-    	for (int col = 0; col < input; col++) {
-    		qArr[row] = col;
-    		if(canPlace(row)) {
-    			nQueen(row + 1);
+    	for (int row = 0; row < input; row++) {
+    		qArr[col] = row;
+    		if(canPlace(col)) {
+    			nQueen(col + 1);
     		}
 		}
     }
 	
     // 같은 열도 아니고 대각선 상으로 겹치지 않을 때 True
-    static boolean canPlace(int row) {
-    	for (int i = 0; i < row; i++) {
+    static boolean canPlace(int col) {
+    	for (int i = 0; i < col; i++) {
     		
-			if((qArr[i] == qArr[row])) {
+			if((qArr[i] == qArr[col])) {
 				return false;
 			} 
-			if(Math.abs(i - row) == Math.abs(qArr[row] - qArr[i])){
+			if(Math.abs(i - col) == Math.abs(qArr[col] - qArr[i])){
 				return false;
 			}
 		}
