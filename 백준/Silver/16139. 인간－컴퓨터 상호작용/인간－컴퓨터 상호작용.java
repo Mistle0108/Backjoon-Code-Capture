@@ -10,18 +10,28 @@ class Main {
     	
     	int q = Integer.parseInt(br.readLine());
 
-    	for (int j = 0; j < q; j++) {
-    		String[] input = br.readLine().split(" "); 
-        	
-        	String a = input[0];
-        	int l = Integer.parseInt(input[1]);
-        	int r = Integer.parseInt(input[2]);
-    		int count = 0;
+    	int[][] dp = new int[26][s.length()];
+    	
+    	for (int i = 0; i < 26 ; i++) { // 모든 문자열에 대해
     		
-    		for (int i = l; i <= r; i++) {
-    			if(a.charAt(0) == s.charAt(i)) count++; 
-    		}
-        	bw.write(count + "\n");
+    		dp[i][0] = (s.charAt(0) == ('a' + i)) ? 1 : 0;
+    		
+			for(int j = 1; j <s.length(); j++) {
+				dp[i][j] = dp[i][j-1] + (('a' + i) == s.charAt(j)? 1 : 0);   
+			}
+		}
+    	
+    	for (int i = 0; i < q; i++) {
+    		String[] temp = br.readLine().split(" ");
+    		
+    		String a = temp[0];
+    		int l = Integer.parseInt(temp[1]);
+    		int r = Integer.parseInt(temp[2]);
+    		
+    		int result = dp[a.charAt(0) - 97][r];
+    		if(l > 0) result -= dp[a.charAt(0) - 97][l-1];
+    		
+    		bw.write(result + "\n");
 		}
 
     	bw.write("");
