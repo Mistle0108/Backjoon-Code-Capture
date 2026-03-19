@@ -1,4 +1,3 @@
-
 import java.io.*;
 
 class Main {
@@ -44,26 +43,12 @@ class Main {
 	    	for (int i = 0; i < half; i++) {
 				for (int j = 0; j < half; j++) {
 					temp1[i][j] = arr[i][j];
+		            temp2[i][j] = arr[i][j + half];
+		            temp3[i][j] = arr[i + half][j];
+		            temp4[i][j] = arr[i + half][j + half];
 				}
 			}
 
-	    	for (int i = 0; i < half; i++) {
-				for (int j = 0; j < half; j++) {
-					temp2[i][j] = arr[i][j+half];
-				}
-			}
-
-	    	for (int i = 0; i < half; i++) {
-				for (int j = 0; j < half; j++) {
-					temp3[i][j] = arr[i+half][j];
-				}
-			}
-
-	    	for (int i = 0; i < half; i++) {
-				for (int j = 0; j < half; j++) {
-					temp4[i][j] = arr[i+half][j+half];
-				}
-			}
 	    	bw.write("(");
 	    	divideNConquer(temp1, half);
 	    	divideNConquer(temp2, half);
