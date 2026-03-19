@@ -1,4 +1,3 @@
-
 import java.io.*;
 
 class Main {
@@ -41,19 +40,11 @@ class Main {
     	} else {
     		int third = n/3;
 
-	    	divide(x, y, third);
-	    	
-	    	divide(x, y + third, third);
-	    	divide(x, y + third*2, third);
-	    	
-	    	divide(x + third, y, third);
-	    	divide(x + third*2, y, third);
-	    	
-	    	divide(x + third, y + third, third);
-	    	
-	    	divide(x + third, y + third*2, third);
-	    	divide(x + third*2, y + third, third);
-	    	divide(x + third*2, y + third*2, third);
+    		for (int i = 0; i < 3; i++) {
+				for (int j = 0; j < 3; j++) {
+					divide(x + i * third, y + j * third, third);
+				}
+			}
     	}
     }
     
