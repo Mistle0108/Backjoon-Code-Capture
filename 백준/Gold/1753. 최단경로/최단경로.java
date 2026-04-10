@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Main {
 	
-	static class Node implements Comparable<Node>{
+	static class Node implements Comparable<Node> {
 		int index;
 		int distance;
 		
@@ -13,15 +13,14 @@ public class Main {
 		}
 		
 		@Override
-	    public int compareTo(Node other) {
-	        return Integer.compare(this.distance, other.distance);
-	    }
-		
+		public int compareTo(Node other) {
+			return Integer.compare(this.distance, other.distance);
+		}
 	}
 	
+	static ArrayList<Node>[] graph;
 	static final int INF = Integer.MAX_VALUE;
 	static int[] d;
-	static ArrayList<Node>[] graph;
 	
 	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -34,11 +33,11 @@ public class Main {
 		
 		int K = Integer.parseInt(br.readLine());
 		
-		graph = new ArrayList[V+1];  
+		graph = new ArrayList[V+1];
 		for (int i = 0; i < V+1; i++) {
-			graph[i] = new ArrayList();
+			graph[i] = new ArrayList();			
 		}
-
+		
 		for (int i = 0; i < E; i++) {
 			String[] temp = br.readLine().split(" ");
 			
@@ -48,20 +47,21 @@ public class Main {
 			
 			graph[u].add(new Node(v,w));
 		}
-
-		d = new int[V+1];		
-		Arrays.fill(d, INF);
-			
+		
+		
+		d = new int[V+1];
+		Arrays.fill(d,INF);
+		
+		
 		dijkstra(K);
 		
-		// 출력 로직 추가
-        StringBuilder sb = new StringBuilder();
-        for (int i = 1; i <= V; i++) {
-            if (d[i] == INF) sb.append("INF\n");
-            else sb.append(d[i]).append("\n");
-        }
-        bw.write(sb.toString());
-        bw.flush();
+		
+		for (int i = 1; i < V+1; i++) {
+			if (d[i] == INF) bw.write("INF\n");
+			else bw.write(d[i] + "\n");
+		}
+		
+	    bw.flush();
         bw.close();
         br.close();
 		
@@ -69,28 +69,21 @@ public class Main {
     
     static void dijkstra(int start) {
     	PriorityQueue<Node> pq = new PriorityQueue<Node>();
-    	
-    	pq.add(new Node(start, 0));
     	d[start] = 0;
+    	pq.add(new Node(start, 0));
     	
     	while(!pq.isEmpty()) {
+    		Node current = pq.poll();
     		
-    		Node node = pq.poll();
+    		int index = current.index;
+    		int distance = current.distance;
     		
-    		int index = node.index;
-    		int distance = node.distance;
-    		
-    		if(d[index] < distance) continue;
-    		
-    	    for(Node next : graph[index]) {
-    	    	
-    	    	int cost = d[index] + next.distance;
-    	    	
-    	    	if(cost < d[next.index]) {
-    	    		d[next.index] = cost;
-    	    		pq.add(new Node(next.index, cost));
-    	    	}
-    	    }
-    	}	
+    		for(Node next: graph[index]) {
+    			if(d[next.index] > d[index] + next.distance) {
+    				d[next.index] = d[index] + next.distance;
+    				pq.add(new Node(next.index, d[next.index]));
+    			}  			
+    		}
+    	}
     }
 }
